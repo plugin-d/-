@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			let obj = {
+				a: 1,
+				b: {
+					c: 222,
+					d: 333,
+					e: {
+						f: 999,
+					},
+				},
+			};
+			const newObj = deepClone(obj);
+			newObj.b.c = 1;
+			// console.log(obj);
+			const obj2 = Object.assign({}, obj);
+			obj2.b.c = 1;
+			console.log(obj2);
+			// 深拷贝
+			function deepClone(target) {
+				let result = null;
+				if (typeof target === "object") {
+					if (Array.isArray(target)) {
+						result = [];
+						for (let i = 0; i <= target.length; i++) {
+							result[i] = deepClone(i);
+						}
+					} else {
+						result = {};
+						for (let k in target) {
+							result[k] = deepClone(target[k]);
+						}
+					}
+				} else {
+					result = target;
+				}
+				return result;
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			class Demo {
+				constructor(name, price) {
+					this.name = name;
+					this.price = price;
+				}
+				func() {
+					console.log(`Demo的名字是${this.name}`);
+				}
+				static func2() {
+					console.log(`111价格${this.price}`);
+				}
+			}
+			function Demo2(name, price) {
+				this.name = name;
+				this.price = price;
+			}
+			Object.defineProperty(Demo2.prototype, "func", {
+				enumerable: false,
+				value: function () {
+					console.log(`Demo2的名字是${this.name}`);
+				},
+			});
+			// Demo2.prototype.func = function () {
+			// 	console.log(`Demo2的名字是${this.name}`);
+			// };
+			Demo2.func2 = function () {
+				console.log(`222价格${this.price}`);
+			};
+			const demo = new Demo("demo1", 11);
+			const demo2 = new Demo2("demo2", 22);
+
+			console.log(demo);
+			console.log(demo2);
+			demo2.func();
+			Demo.func2();
+			for (let k in demo) {
+				console.log(k);
+			}
+			console.log("------------");
+			for (let k in demo2) {
+				console.log(k);
+			}
+		</script>
+	</body>
+</html>

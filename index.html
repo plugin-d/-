@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div class="box"></div>
+		<script>
+			// 防抖
+			function debounce(fn, time) {
+				let timeId = null;
+				return function (...args) {
+					if (timeId) {
+						clearTimeout(timeId);
+					}
+					timeId = setTimeout(() => {
+						fn(...args);
+					}, time);
+				};
+			}
+			// 节流
+			function throttle(fn, time) {
+				let timeId = null;
+				return function (...args) {
+					if (!timeId) {
+						fn(...args);
+						timeId = setTimeout(() => {
+							timeId = null;
+						}, time);
+					}
+				};
+			}
+			// 深拷贝
+			function deepClone(target) {
+				let res = null;
+				if (typeof target === "object") {
+					if (Array.isArray(target)) {
+						res = [];
+						for (let i = 0; i < target.length; i++) {
+							res.push(deepClone(target[i]));
+						}
+					} else if (target == null) {
+						res = null;
+					} else if (
+						target.constructor === RegExp ||
+						target.constructor === Date
+					) {
+						res = target;
+					} else {
+						res = {};
+						for (let i in target) {
+							res[i] = deepClone(target[i]);
+						}
+					}
+				} else {
+					res = target;
+				}
+				return res;
+			}
+			const a = debounce(function (a, b) {
+				console.log(a, b);
+			}, 1000);
+			// a(1, 2);
+		</script>
+	</body>
+</html>

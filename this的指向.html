@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div class="box">1111</div>
+		<script>
+			// function a() {
+			// 	console.log("a", this);
+			// 	function b() {
+			// 		console.log("b", this);
+			// 	}
+			// 	b();
+			// }
+			//  a :window b:window
+			// a();
+			let obj = {
+				a: function () {
+					console.log("a:", this);
+					function c() {
+						console.log("c", this);
+					}
+					c();
+				},
+				b: () => {
+					console.log("b:", this);
+				},
+			};
+			obj.a();
+			obj.b();
+		</script>
+	</body>
+</html>
